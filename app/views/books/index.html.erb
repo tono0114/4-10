@@ -1,0 +1,42 @@
+<div class="container px-5 px-sm-0">
+  <% if @new_book.errors.any? %>
+      <h3 class="text-danger mt-3"><%= @new_book.errors.count %> errors prohibited this obj from being saved:</h3>
+      <% @new_book.errors.full_messages.each do |message| %>
+        <ul class="text-danger m-0">
+          <li><%= message %></li>
+        </ul>
+      <% end %>
+    <% end %>
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'layouts/user_info', user: @user %>
+      <%= render 'layouts/new_book', book: @new_book %>
+    </div>
+    <div class="col-md-8 offset-md-1 mt-3">
+      <h2>Books</h2>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="col-1"></th>
+              <th class="col-6">Title</th>
+              <th class="col-5">Opinion</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @books.each do |book| %>
+            <tr>
+              <td>
+                <%= link_to user_path(book.user) do %>
+                <%= attachment_image_tag book.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+                <% end %>
+              </td>
+              <td><%= link_to book.title,book_path(book.id) %></td>
+              <td><%= book.body %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>

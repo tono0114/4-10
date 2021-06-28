@@ -1,0 +1,29 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'layouts/user_info', user: @user %>
+      <%= render 'layouts/new_book', book: @new_book %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2 class="mt-3">Users</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-2">image</th>
+              <th class="col-8">name</th>
+              <th class="col-2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+            <tr>
+              <td><%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: "40x40" %></td>
+              <td><%= user.name %></td>
+              <td><%= link_to"Show",user_path(user.id) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
